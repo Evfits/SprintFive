@@ -45,15 +45,14 @@ type Training struct {
 
 // distance возвращает дистанцию, которую преодолел пользователь.
 func (t Training) distance() float64 {
-	// вставьте ваш код ниже
-	// формула Action * LenStep / MInKm
 	return float64(t.Action) * t.LenStep / MInKm
 }
 
 // meanSpeed возвращает среднюю скорость бега или ходьбы.
 func (t Training) meanSpeed() float64 {
-	// вставьте ваш код ниже
-	// формула преодолённая_дистанция_за_тренировку_в_км / время_тренировки_в_часах
+	if t.Duration == 0 {
+		return 0
+	}
 	return t.distance() / t.Duration.Hours()
 
 }
@@ -142,6 +141,9 @@ type Swimming struct {
 
 // meanSpeed возвращает среднюю скорость при плавании.
 func (s Swimming) meanSpeed() float64 {
+	if s.Duration == 0 {
+		return 0
+	}
 	return float64(s.LengthPool*s.CountPool/MInKm) / s.Duration.Hours()
 
 }
